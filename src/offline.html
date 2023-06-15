@@ -1,0 +1,75 @@
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="./output.css">
+
+
+    <title>PWA</title>
+</head>
+
+<body>
+    <h1>PWA Offline articles</h1>
+
+    <div id="posts"></div>
+
+    <script>
+        // Récupérer les données du localStorage
+        let posts = localStorage.getItem("posts");
+
+        for(let i = 0; localStorage.length; i++) {
+            const key = localStorage.key(i)
+            if (key.startsWith('post-')) {
+                const post = JSON.parse(localStorage.getItem(key))
+                const card = `
+                <div class="card w-50 mx-auto my-3">
+                        <div class="card-header">
+                            <h2>${post.title}</h2>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>${post.body}</p>
+                            </blockquote>
+                        </div>
+                        <div class="card-footer text-center">
+        <a href="post.html?id=${post.id}" class="btn btn-primary">Voir plus</a>
+      </div>
+                    </div>
+                `;
+                document.querySelector("#posts").innerHTML += card;
+            }
+        }
+        
+        // Vérifier si des données sont présentes
+    //     if (posts) {
+    //         // Convertir les données JSON en tableau d'objets
+    //         let parsedPosts = JSON.parse(posts);
+    
+    //         // Parcourir les posts et générer les cartes
+    //         parsedPosts.forEach((post) => {
+    //             const card = `
+    //             <div class="card w-50 mx-auto my-3">
+    //                     <div class="card-header">
+    //                         <h2>${post.title}</h2>
+    //                     </div>
+    //                     <div class="card-body">
+    //                         <blockquote class="blockquote mb-0">
+    //                             <p>${post.body}</p>
+    //                         </blockquote>
+    //                     </div>
+    //                     <div class="card-footer text-center">
+    //     <a href="post.html?id=${post.id}" class="btn btn-primary">Voir plus</a>
+    //   </div>
+    //                 </div>
+    //             `;
+    
+    //             document.querySelector("#posts").innerHTML += card;
+    //         });
+    //     }
+    </script>
+    
+</body>
+
+</html>
